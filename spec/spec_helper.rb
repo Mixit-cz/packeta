@@ -2,7 +2,7 @@ require "bundler/setup"
 require "packeta"
 
 ENV["PACKETA_HOST"] ||= "https://www.zasilkovna.cz/api/rest"
-ENV["PACKETA_API_KEY"] ||= "abcdefgh"
+ENV["PACKETA_API_PASSWORD"] ||= "abcdefgh"
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"
@@ -14,7 +14,7 @@ RSpec.configure do |config|
   config.before(:all) do
     Packeta.configure do |config|
       config.host = ENV["PACKETA_HOST"]
-      config.api_key = ENV["PACKETA_API_KEY"]
+      config.api_password = ENV["PACKETA_API_PASSWORD"]
     end
   end
 end

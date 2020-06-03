@@ -5,10 +5,26 @@ require "packeta"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
+def _app_path
+  @app_path ||= File.expand_path "../../lib/", __FILE__
+end
+
+def _load
+  all_files = $".select { |path| path.start_with?(_app_path) }.
+    select { |f| File.exists?(f) } # remove file deleted during development
+  main = all_files.pop { |f| f.contains? "packeta.rb" }
+  load main
+  all_files.each { |f| load f }
+  include Packeta
+end
+
+def _reload
+  Object.send(:remove_const, :"Packeta");
+  _load
+  puts "==> Reloaded 🙃"
+end
 
 # (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
-
-require "irb"
-IRB.start(__FILE__)
+require "pry"
+include Packeta
+Pry.start

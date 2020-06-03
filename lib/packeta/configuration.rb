@@ -1,10 +1,12 @@
 module Packeta
   class Configuration
-    attr_writer :host, :api_key
+    attr_accessor :debug
+    attr_writer :host, :api_password
 
     def initialize
       @host = "https://www.zasilkovna.cz/api/rest"
-      @api_key = nil
+      @api_password = nil
+      @debug = true
     end
 
     def host
@@ -12,9 +14,9 @@ module Packeta
       @host
     end
 
-    def api_key
-      raise Errors::Configuration, "Packeta API key missing!" unless @api_key
-      @api_key
+    def api_password
+      raise Errors::Configuration, "Packeta API password missing!" unless @api_password
+      @api_password
     end
   end
 end

@@ -4,8 +4,8 @@ RSpec.describe Packeta::Configuration do
       expect(Packeta.configuration.host).to eq(ENV["PACKETA_HOST"])
     end
 
-    it "returns the correct API key" do
-      expect(Packeta.configuration.api_key).to eq(ENV["PACKETA_API_KEY"])
+    it "returns the correct API password" do
+      expect(Packeta.configuration.api_password).to eq(ENV["PACKETA_API_PASSWORD"])
     end
   end
 
@@ -14,8 +14,8 @@ RSpec.describe Packeta::Configuration do
       Packeta.reset
     end
 
-    it "raises configuration error for missing API key" do
-      expect { Packeta.configuration.api_key }.to raise_error(Packeta::Errors::Configuration)
+    it "raises configuration error for missing API password" do
+      expect { Packeta.configuration.api_password }.to raise_error(Packeta::Errors::Configuration)
     end
   end
 end

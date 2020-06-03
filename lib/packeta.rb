@@ -1,5 +1,21 @@
+require "active_support"
+require "active_support/core_ext/string/inflections"
+
+require "dry-struct"
+require "dry-types"
+require "http"
+require "libxml"
+require "pry"
+
 require "packeta/configuration"
+require "packeta/types"
+require "packeta/types/size"
+require "packeta/request"
+require "packeta/create_packet"
 require "packeta/errors"
+require "packeta/entity"
+require "packeta/packet"
+require "packeta/result"
 require "packeta/version"
 
 module Packeta
