@@ -1,7 +1,9 @@
 module Packeta
   class Entity < Dry::Struct
     def xml
-      raise Errors::NotImplemented, "Do not call Packeta::Entity directly."
+      attributes.map do |k, v|
+        create_node(k, v)
+      end
     end
 
     private

@@ -9,10 +9,10 @@ module Packeta
     attribute? :phone, Types::String.optional
     attribute :address_id, Types::Integer
     attribute? :currency, Types::String.optional
-    attribute? :cod, Types::Decimal.optional
-    attribute :value, Types::Coercible::Decimal
-    attribute? :weight, Types::Decimal.optional
-    attribute :deliver_on, Types::Date
+    attribute? :cod, Types::Coercible::Float.optional
+    attribute :value, Types::Coercible::Float
+    attribute? :weight, Types::Coercible::Float.optional
+    attribute? :deliver_on, Types::Date.optional
     attribute :eshop, Types::String
     attribute? :adult_content, Types::Bool.optional
     attribute? :note, Types::String.optional

@@ -56,15 +56,6 @@ module Packeta
       status == "fault"
     end
 
-    def result
-      res = {}
-      %w(id barcode barcodeText).each do |key|
-        res[key.underscore.to_sym] = @response.find_first("result/#{key}")&.content
-      end
-
-      res
-    end
-
     def status
       @response.find_first("status").content
     end

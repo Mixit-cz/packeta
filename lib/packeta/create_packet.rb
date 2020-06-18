@@ -1,5 +1,7 @@
 module Packeta
   class CreatePacket < Request
-    self.action = "createPacket"
+    def action
+      "createPacket"
+    end
   end
 end
