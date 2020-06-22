@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-types", "~> 1.4"
   spec.add_dependency "http", "~> 4.4"
   spec.add_dependency "libxml-ruby", "~> 3.2"
+  spec.add_dependency "oj", "~> 3.10"
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "pry", "~> 0.12.2"
   spec.add_development_dependency "rake", "~> 12.0"

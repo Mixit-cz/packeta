@@ -2,6 +2,8 @@ require "bundler/setup"
 require "packeta"
 
 ENV["PACKETA_HOST"] ||= "https://www.zasilkovna.cz/api/rest"
+ENV["PACKETA_BASE_URL"] ||= "https://www.zasilkovna.cz/api"
+ENV["PACKETA_API_KEY"] ||= "abcdefgh"
 ENV["PACKETA_API_PASSWORD"] ||= "abcdefgh"
 
 RSpec.configure do |config|
@@ -15,6 +17,8 @@ RSpec.configure do |config|
     Packeta.configure do |config|
       config.host = ENV["PACKETA_HOST"]
       config.api_password = ENV["PACKETA_API_PASSWORD"]
+      config.api_key = ENV["PACKETA_API_KEY"]
+      config.base_url = ENV["PACKETA_BASE_URL"]
     end
   end
 end
