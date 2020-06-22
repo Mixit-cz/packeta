@@ -24,6 +24,17 @@ Or install it yourself as:
 
     $ gem install packeta
 
+## Configuration
+
+Create an initializer in `config/initializers/packeta.rb` with following content:
+
+```ruby
+Packeta.configure do |config|
+  config.api_key = "Your API key"
+  config.api_password = "Your API password"
+end
+```
+
 ## Usage
 
 ### Create a packet
