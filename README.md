@@ -1,8 +1,12 @@
 # Packeta
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/packeta`. To experiment with that code, run `bin/console` for an interactive prompt.
+Gem for interacting with [Packeta](https://packeta.com) delivery service.
 
-TODO: Delete this and the text above, and describe your gem
+## Current status
+
+- Creating Packets
+- Generating PDF labels
+- Downloading carrier's pickup points in JSON (with shortcut for Paczkomat at the moment)
 
 ## Installation
 
@@ -22,7 +26,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Create a packet
+
+```ruby
+packet = Packeta::Packet.new(
+  number: "123",
+  name: "Michal",
+  surname: "Gritzbach",
+  email: "michal@example.com",
+  address_id: 102,
+  eshop: "Mixit.cz",
+  value: 100,
+  currency: "CZK"
+)
+created_packet = Packeta::CreatePacket.new(packet).call
+created_packet.barcode
+#=> "Z1234567890"
+```
+
+### Create PDF label
+
+```ruby
+label = Packeta::LabelPdf.new(packet_id: "Z1234567890", format: "A7 on A4")
+created_label = Packeta::PacketLabelPdf.new(label).call
+created_label.pdf
+#=> ""%PDF-1.7\n%\xE2\xE3\xCF\xD3\n7 0 obj\n<< /Type /Page /Parent 1 0 R…"
+```
 
 ## Development
 
@@ -32,7 +61,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/packeta.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Mixit-cz/packeta.
 
 ## License
 
