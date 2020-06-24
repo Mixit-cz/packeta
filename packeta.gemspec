@@ -34,8 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # spec.add_dependency "activemodel-serializers-xml", "~> 1.0"
-  spec.add_dependency "activesupport", "~> 6.0.3"
+  spec.add_dependency "activesupport"
   spec.add_dependency "dry-struct", "~> 1.3"
   spec.add_dependency "dry-types", "~> 1.4"
   spec.add_dependency "http", "~> 4.4"
