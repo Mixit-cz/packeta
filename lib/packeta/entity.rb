@@ -9,8 +9,14 @@ module Packeta
     private
 
     def create_node(name, value = nil, type = nil)
-      node = LibXML::XML::Node.new(name.to_s.camelize(:lower))
-      node.content = value.to_s unless value.nil?
+      unless value.nil?
+        if value.respond_to?(:xml)
+          node = value.xml
+        else
+          node = LibXML::XML::Node.new(name.to_s.camelize(:lower))
+          node.content = value.to_s
+        end
+      end
       LibXML::XML::Attr.new(node, "type", type) unless type.nil?
       node
     end
