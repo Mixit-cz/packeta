@@ -1,9 +1,10 @@
 module Packeta
   class Request
-    cattr_accessor :action, :obj
+    attr_accessor :action, :obj, :configuration
 
-    def initialize(obj)
+    def initialize(obj, configuration = Packeta.configuration)
       @obj = obj
+      @configuration = configuration
     end
 
     def action
@@ -12,12 +13,12 @@ module Packeta
 
     def body
       node = LibXML::XML::Node.new(action)
-      node << LibXML::XML::Node.new("apiPassword", Packeta.configuration.api_password)
+      node << LibXML::XML::Node.new("apiPassword", @configuration.api_password)
       node
     end
 
     def call
-      response = HTTP.post(Packeta.configuration.host, body: xml)
+      response = HTTP.post(@configuration.host, body: xml)
       klass = "#{action}Result".classify
       namespaced_klass = "Packeta::#{klass}".constantize
       namespaced_klass.new(response)
