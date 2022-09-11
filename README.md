@@ -35,6 +35,14 @@ Packeta.configure do |config|
 end
 ```
 
+Or configuration can be passed as param into Request sub-class like Packeta::CreatePacket.new(packet, configuration)
+
+```ruby
+packet = Packeta::Packet.new(...)
+packeta_configuration = Packeta::Configuration.new(api_key: 'Your API key', api_password: 'Your API password')
+Packeta::CreatePacket.new(packet, packeta_configuration)
+```
+
 ## Usage
 
 ### Create a packet
