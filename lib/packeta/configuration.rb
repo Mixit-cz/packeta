@@ -3,12 +3,12 @@ module Packeta
     attr_accessor :debug
     attr_writer :host, :api_password, :api_key, :base_url
 
-    def initialize
-      @host = "https://www.zasilkovna.cz/api/rest"
-      @base_url = "https://www.zasilkovna.cz/api"
-      @api_key = nil
-      @api_password = nil
-      @debug = true
+    def initialize(options = {})
+      @host = options[:host] || "https://www.zasilkovna.cz/api/rest"
+      @base_url = options[:base_url] || "https://www.zasilkovna.cz/api"
+      @api_key = options[:api_key]
+      @api_password = options[:api_password]
+      @debug = options[:debug] || false
     end
 
     def host
