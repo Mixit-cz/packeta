@@ -9,7 +9,7 @@ module Packeta
     end
 
     def barcode_text
-      @response.find_first("result/barcode_text").content if ok?
+      @response.find_first("result/barcodeText").content if ok?
     end
   end
 end
