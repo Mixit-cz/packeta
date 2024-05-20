@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-struct", "~> 1.3"
   spec.add_dependency "dry-types", "~> 1.4"
   spec.add_dependency "http", "~> 4.4"
-  spec.add_dependency "libxml-ruby", "~> 3.2"
+  spec.add_dependency "libxml-ruby", "~> 5.0.2"
   spec.add_dependency "oj", "~> 3.10"
   spec.add_development_dependency "bundler", "~> 2.3"
   spec.add_development_dependency "pry", "~> 0.12.2"
