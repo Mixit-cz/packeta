@@ -1,7 +1,7 @@
 module PacketaRequestsHelper
   def request_mock(instance, label)
     xml_parts = label.xml.map(&:to_s).join("\n  ")
-    body = "<#{instance.action}>\n  <apiPassword>#{ENV['PACKETA_API_PASSWORD']}</apiPassword>\n  #{xml_parts}"
+    body = "<#{instance.action}>\n  <apiPassword>#{ENV['PACKETA_API_PASSWORD']}</apiPassword>\n  #{xml_parts}\n</#{instance.action}>"
 
     {
       body: body
