@@ -1,14 +1,16 @@
 module PacketaRequestsHelper
   def expected_request(request)
-    xml_elements =
-      [
-        "<#{request.action}>\n  ",
-        "<apiPassword>#{ENV['PACKETA_API_PASSWORD']}</apiPassword>\n  ",
-        request.obj.xml.map(&:to_s).join("\n  "),
-        "\n</#{request.action}>"
-      ]
+    request_xml = LibXML::XML::Document.new.tap do |xml|
+      root_node = LibXML::XML::Node.new(request.action)
+      api_password_node = LibXML::XML::Node.new('apiPassword', ENV['PACKETA_API_PASSWORD'])
 
-    [ENV['PACKETA_HOST'], { body: xml_elements.join }]
+      root_node << api_password_node
+      request.obj.xml.each { |package_node| root_node << package_node }
+
+      xml.root = root_node
+    end
+
+    [ENV['PACKETA_HOST'], { body: request_xml.root.to_s }]
   end
 
   def expected_response(status: 'ok', &result_creator)
