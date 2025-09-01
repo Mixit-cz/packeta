@@ -2,8 +2,8 @@ RSpec.describe Packeta::PacketCourierLabelPdf do
   include PacketaRequestsHelper
 
   describe '#call' do
-    let(:request) { described_class.new(label) }
     let(:label) { Packeta::CourierLabelPdf.new(packet_id: 1, format: Packeta::Entity::LABEL_FORMATS.first, courier_number: 'number') }
+    let(:request) { described_class.new(label) }
     let(:label_pdf_content) { 'mock PDF content' }
 
     let(:response) do
@@ -13,7 +13,10 @@ RSpec.describe Packeta::PacketCourierLabelPdf do
     end
 
     before do
-      expect(HTTP).to receive(:post).with(*expected_request(request)).and_return(response)
+      expect(HTTP)
+        .to receive(:post)
+        .with(*expected_request(request))
+        .and_return(response)
     end
 
     it 'returns result with PDF file content' do
