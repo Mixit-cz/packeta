@@ -2,7 +2,7 @@ RSpec.describe Packeta::PacketCourierLabelPdf do
   include PacketaRequestsHelper
 
   describe '#call' do
-    let(:label) { Packeta::CourierLabelPdf.new(packet_id: 1, format: 'A6 on A6', courier_number: 'number') }
+    let(:label) { Packeta::CourierLabelPdf.new(packet_id: 1, format: Packeta::Entity::LABEL_FORMATS.first, courier_number: 'number') }
     let(:label_pdf_content) { 'mock PDF content' }
 
     let(:response) do

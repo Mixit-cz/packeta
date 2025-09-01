@@ -2,7 +2,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
   include PacketaRequestsHelper
 
   describe '#call' do
-    let(:label) { Packeta::LabelPdf.new(packet_id: 1, format: 'A6 on A6') }
+    let(:label) { Packeta::LabelPdf.new(packet_id: 1, format: Packeta::Entity::LABEL_FORMATS.first) }
     let(:courier_number) { 'mock_number' }
     let(:response) do
       api_response_mock do |result_node|
