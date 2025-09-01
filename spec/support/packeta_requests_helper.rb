@@ -3,9 +3,10 @@ module PacketaRequestsHelper
     xml_parts = request.obj.xml.map(&:to_s).join("\n  ")
     body = "<#{request.action}>\n  <apiPassword>#{ENV['PACKETA_API_PASSWORD']}</apiPassword>\n  #{xml_parts}\n</#{request.action}>"
 
-    {
-      body: body
-    }
+    [
+      ENV['PACKETA_HOST'],
+      {body: body}
+    ]
   end
 
   def expected_response(status: 'ok', &result_creator)

@@ -15,7 +15,10 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
     end
 
     before do
-      allow(HTTP).to receive(:post).with(ENV['PACKETA_HOST'], expected_request(request)).and_return(response)
+      allow(HTTP)
+        .to receive(:post)
+        .with(*expected_request(request))
+        .and_return(response)
     end
 
     it 'returns result with courier number' do
