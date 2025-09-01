@@ -31,6 +31,8 @@ require "packeta/packet_label_pdf_result"
 require "packeta/packets_labels_pdf_result"
 require "packeta/packet_status"
 require "packeta/packet_status_result"
+require "packeta/packet_courier_number_v2"
+require "packeta/packet_courier_number_v2_result"
 require "packeta/version"
 
 module Packeta
