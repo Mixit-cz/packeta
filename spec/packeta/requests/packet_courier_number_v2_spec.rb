@@ -5,7 +5,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
     let(:label) { Packeta::LabelPdf.new(packet_id: 1, format: 'A6 on A6') }
     let(:courier_number) { 'mock_number' }
     let(:response) do
-      api_response do |result|
+      api_response_mock do |result|
         number = LibXML::XML::Node.new('courierNumber')
         number.content = courier_number
 

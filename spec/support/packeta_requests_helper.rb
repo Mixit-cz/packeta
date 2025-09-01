@@ -1,5 +1,5 @@
 module PacketaRequestsHelper
-  def api_response(status: 'ok', &response)
+  def api_response_mock(status: 'ok', &response)
     LibXML::XML::Document.new.tap do |result|
       response_node = LibXML::XML::Node.new('response')
       result_node = LibXML::XML::Node.new('result')
