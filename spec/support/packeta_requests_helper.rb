@@ -8,10 +8,7 @@ module PacketaRequestsHelper
         "\n</#{request.action}>"
       ]
 
-    [
-      ENV['PACKETA_HOST'],
-      { body: xml_elements.join }
-    ]
+    [ENV['PACKETA_HOST'], { body: xml_elements.join }]
   end
 
   def expected_response(status: 'ok', &result_creator)
