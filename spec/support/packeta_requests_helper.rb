@@ -5,7 +5,7 @@ module PacketaRequestsHelper
       result_node = LibXML::XML::Node.new('result')
       status_node = LibXML::XML::Node.new('status')
 
-      yield(result_node)
+      response.call(result_node)
 
       status_node.content = status
       response_node << status_node
