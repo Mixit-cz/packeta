@@ -6,7 +6,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
     let(:label) { Packeta::LabelPdf.new(packet_id: 1, format: Packeta::Entity::LABEL_FORMATS.first) }
     let(:courier_number) { 'mock_number' }
     let(:response) do
-      api_response_mock do |result_node|
+      expected_response do |result_node|
         number = LibXML::XML::Node.new('courierNumber')
         number.content = courier_number
 
@@ -15,7 +15,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
     end
 
     before do
-      allow(HTTP).to receive(:post).with(ENV['PACKETA_HOST'], request_mock(instance, label)).and_return(response)
+      allow(HTTP).to receive(:post).with(ENV['PACKETA_HOST'], expected_request(instance, label)).and_return(response)
     end
 
     it 'returns result with courier number' do
