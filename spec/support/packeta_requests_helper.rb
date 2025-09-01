@@ -1,5 +1,5 @@
 module PacketaRequestsHelper
-  def expected_request_payload(request)
+  def expected_payload(request)
     LibXML::XML::Node.new(request.action).tap do |xml|
       api_password_node = LibXML::XML::Node.new('apiPassword', ENV['PACKETA_API_PASSWORD'])
 

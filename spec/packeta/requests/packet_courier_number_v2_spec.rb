@@ -18,7 +18,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
     before do
       expect(HTTP)
         .to receive(:post)
-        .with(ENV['PACKETA_HOST'], body: expected_request_payload(request))
+        .with(ENV['PACKETA_HOST'], body: expected_payload(request))
         .and_return(response)
     end
 
