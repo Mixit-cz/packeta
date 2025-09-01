@@ -1,5 +1,7 @@
 module Packeta
   class Entity < Dry::Struct
+    LABEL_FORMATS = ['A6 on A6', 'A7 on A7', 'A6 on A4', 'A7 on A4', '105x32mm on A4', 'A8 on A8'].freeze
+
     def xml
       attributes.map do |k, v|
         create_node(k, v)
