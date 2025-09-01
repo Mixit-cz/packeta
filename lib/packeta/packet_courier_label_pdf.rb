@@ -1,7 +1,7 @@
 module Packeta
   class PacketCourierLabelPdf < Request
     def action
-      "packetCourierLabelPdf"
+      'packetCourierLabelPdf'
     end
   end
 end
