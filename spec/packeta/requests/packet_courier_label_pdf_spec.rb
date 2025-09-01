@@ -6,8 +6,8 @@ RSpec.describe Packeta::PacketCourierLabelPdf do
     let(:label_pdf_content) { 'mock PDF content' }
 
     let(:response) do
-      api_response_mock do |result|
-        result.content = Base64.encode64(label_pdf_content)
+      api_response_mock do |result_node|
+        result_node.content = Base64.encode64(label_pdf_content)
       end
     end
 
