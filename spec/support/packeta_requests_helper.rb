@@ -1,11 +1,16 @@
 module PacketaRequestsHelper
   def expected_request(request)
-    xml_parts = request.obj.xml.map(&:to_s).join("\n  ")
-    body = "<#{request.action}>\n  <apiPassword>#{ENV['PACKETA_API_PASSWORD']}</apiPassword>\n  #{xml_parts}\n</#{request.action}>"
+    xml_elements =
+      [
+        "<#{request.action}>\n  ",
+        "<apiPassword>#{ENV['PACKETA_API_PASSWORD']}</apiPassword>\n  ",
+        request.obj.xml.map(&:to_s).join("\n  "),
+        "\n</#{request.action}>"
+      ]
 
     [
       ENV['PACKETA_HOST'],
-      {body: body}
+      { body: xml_elements.join }
     ]
   end
 
