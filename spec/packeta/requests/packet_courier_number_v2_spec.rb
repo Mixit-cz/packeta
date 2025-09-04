@@ -2,9 +2,19 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
   include PacketaRequestsHelper
 
   describe '#call' do
-    let(:label) { Packeta::LabelPdf.new(packet_id: 1, format: Packeta::Entity::LABEL_FORMATS.first) }
-    let(:request) { described_class.new(label) }
+    let(:created_packet) do
+      #Packet::CreatePacketResult
+      {}
+    end
+
+    let(:request) { described_class.new(created_packet) }
     let(:courier_number) { 'mock_number' }
+
+    let(:payload) do
+      expected_payload(request) do
+        LibXML::XML::Node.new('packetId', ENV['PACKETA_API_PASSWORD'])
+      end
+    end
 
     let(:response) do
       expected_response do |result_node|
@@ -18,7 +28,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
     before do
       expect(HTTP)
         .to receive(:post)
-        .with(ENV['PACKETA_HOST'], body: expected_payload(request))
+        .with(ENV['PACKETA_HOST'], body: payload)
         .and_return(response)
     end
 
