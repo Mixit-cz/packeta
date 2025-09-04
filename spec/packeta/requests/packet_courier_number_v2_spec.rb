@@ -8,8 +8,6 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
       described_class.new(entity)
     end
 
-    let(:courier_number) { 'mock_number' }
-
     let(:response) do
       expected_response do |result_node|
         number = LibXML::XML::Node.new('courierNumber')
@@ -18,6 +16,8 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
         result_node << number
       end
     end
+
+    let(:courier_number) { 'mock_number' }
 
     before do
       expect(HTTP)
