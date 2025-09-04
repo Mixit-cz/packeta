@@ -3,7 +3,7 @@ RSpec.describe Packeta::PacketCourierNumberV2 do
 
   describe '#call' do
     let(:request) do
-      entity = Packeta::CourierNumberV2.new(packetId: '1234')
+      entity = Packeta::CourierNumberV2.new(packet_id: '1234')
 
       described_class.new(entity)
     end
