@@ -4,7 +4,7 @@ module PacketaRequestsHelper
       api_password_node = LibXML::XML::Node.new('apiPassword', ENV['PACKETA_API_PASSWORD'])
 
       xml << api_password_node
-      request.obj.xml.each { |package_node| xml << package_node }
+      request.obj.xml.each { |entity_node| xml << entity_node }
     end.to_s
   end
 
