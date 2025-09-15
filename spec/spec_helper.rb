@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "packeta"
+require "./spec/support/packeta_requests_helper.rb"
 
 ENV["PACKETA_HOST"] ||= "https://www.zasilkovna.cz/api/rest"
 ENV["PACKETA_BASE_URL"] ||= "https://www.zasilkovna.cz/api"
