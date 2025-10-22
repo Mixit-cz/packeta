@@ -5,7 +5,7 @@ module Packeta
     def barcode
       return unless ok?
 
-      @response.find_first('result/courierInfo/courierInfoItem/courierBarcodes/courierBarcode').content
+      response.find_first('result/courierInfo/courierInfoItem/courierBarcodes/courierBarcode').content
     end
 
     def to_h
