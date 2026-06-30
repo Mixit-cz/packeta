@@ -16,6 +16,15 @@ RSpec.describe Packeta::PacketInfo do
             item << LibXML::XML::Node.new('courierBarcodes').tap do |barcodes|
               barcodes << LibXML::XML::Node.new('courierBarcode').tap { _1.content = barcode }
             end
+            if courier_tracking_url_data.any?
+              item << LibXML::XML::Node.new('courierTrackingUrls').tap do |tracking_urls|
+                courier_tracking_url_data.each do |url_data|
+                  tracking_urls << LibXML::XML::Node.new('courierTrackingUrl').tap do |tracking_url|
+                    tracking_url << LibXML::XML::Node.new('url').tap { _1.content = url_data[:url] } if url_data.key?(:url)
+                  end
+                end
+              end
+            end
           end
         end
       end
@@ -23,6 +32,7 @@ RSpec.describe Packeta::PacketInfo do
 
     let(:barcode) { 'testing_barcode' }
     let(:courier_name) { 'test courier' }
+    let(:courier_tracking_url_data) { [] }
 
     before do
       expect(HTTP)
@@ -47,6 +57,57 @@ RSpec.describe Packeta::PacketInfo do
         }
 
       expect(result.to_h).to eq(expected_info)
+    end
+
+    it 'returns an empty array when courier tracking URLs are missing' do
+      result = request.call
+
+      expect(result.courier_tracking_urls).to eq([])
+    end
+
+    context 'when courierTrackingUrl is returned as an array' do
+      let(:courier_tracking_url_data) do
+        [
+          { url: 'https://tracking.example.test/first' },
+          { url: '' },
+          { url: '   ' },
+          { url: 'https://tracking.example.test/second' }
+        ]
+      end
+
+      it 'returns all non-blank URLs' do
+        result = request.call
+
+        expect(result.courier_tracking_urls).to eq([
+          'https://tracking.example.test/first',
+          'https://tracking.example.test/second'
+        ])
+      end
+    end
+
+    context 'when courierTrackingUrl is returned as a single hash' do
+      let(:courier_tracking_url_data) { [{ url: 'https://tracking.example.test/only' }] }
+
+      it 'returns the URL' do
+        result = request.call
+
+        expect(result.courier_tracking_urls).to eq(['https://tracking.example.test/only'])
+      end
+    end
+
+    context 'when courierTrackingUrl entries have blank or missing URLs' do
+      let(:courier_tracking_url_data) do
+        [
+          { url: '' },
+          {}
+        ]
+      end
+
+      it 'skips blank and missing URLs' do
+        result = request.call
+
+        expect(result.courier_tracking_urls).to eq([])
+      end
     end
   end
 end
